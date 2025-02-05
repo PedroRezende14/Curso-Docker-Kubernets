@@ -1,0 +1,29 @@
+version: '3.3'
+
+services:
+  db: # container do mysql
+    image: mysql:5.7 # from
+    volumes:
+      - db_data:/var/lib/mysql # onde os dados vão ficar salvos
+    restart: always # avisando que as atualizações nesse arquivo persistem
+    environment: # Configurando o ambiente
+      MYSQL_ROOT_PASSWORD: wordpress
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: rezende
+      MYSQL_PASSWORD: 123
+
+  wordpress: # acessando o ambiente
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    restart: always
+    environment:
+      WORDPRESS_DB_HOST: db:3306
+      WORDPRESS_DB_USER: rezende
+      WORDPRESS_DB_PASSWORD: 123
+      WORDPRESS_DB_NAME: wordpress
+
+volumes:  
+  db_data: {}

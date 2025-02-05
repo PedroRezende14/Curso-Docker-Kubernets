@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minhas Anotações Docker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 20px;
+            padding: 20px;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h2 {
+            color: #333;
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 5px;
+        }
+        code {
+            background: #eee;
+            padding: 3px 5px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        pre {
+            background: #333;
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Minhas Anotações Docker</h1>
+        
+        <h2>1. Parar e deletar todos os contêineres</h2>
+        <ul>
+            <li><strong>Parar todos os contêineres em execução:</strong> <code>docker stop $(docker ps -q)</code></li>
+            <li><strong>Deletar todos os contêineres:</strong> <code>docker rm $(docker ps -aq)</code></li>
+            <li><strong>Deletar todas as imagens:</strong> <code>docker rmi $(docker images -q) --force</code></li>
+            <li><strong>Deletar tudo, incluindo volumes:</strong> <code>docker system prune -a --volumes -f</code></li>
+        </ul>
+
+        <h2>Comandos básicos para containers</h2>
+        <ul>
+            <li><strong>Rodar um contêiner:</strong> <code>docker run nome_da_imagem</code></li>
+            <li><strong>Parar um contêiner:</strong> <code>docker stop id/nome_do_container</code></li>
+            <li><strong>Listar todos os contêineres:</strong> <code>docker ps -a</code></li>
+            <li><strong>Listar contêineres em execução:</strong> <code>docker ps</code></li>
+            <li><strong>Ver logs de um contêiner:</strong> <code>docker logs id/nome_do_container</code></li>
+        </ul>
+
+        <h2>Trabalhando com imagens e Dockerfile</h2>
+        <pre>
+FROM imagem_base
+WORKDIR /app
+EXPOSE 80
+COPY . .
+        </pre>
+        <ul>
+            <li><strong>Construir uma imagem:</strong> <code>docker build -t nome_da_imagem .</code></li>
+            <li><strong>Rodar uma imagem:</strong> <code>docker run nome_da_imagem</code></li>
+            <li><strong>Deletar uma imagem:</strong> <code>docker rmi id/nome_imagem</code></li>
+        </ul>
+
+        <h2>Volumes e Redes</h2>
+        <ul>
+            <li><strong>Criar um volume:</strong> <code>docker volume create nome_do_volume</code></li>
+            <li><strong>Listar volumes:</strong> <code>docker volume ls</code></li>
+            <li><strong>Criar uma rede:</strong> <code>docker network create nome_da_rede</code></li>
+            <li><strong>Listar redes:</strong> <code>docker network ls</code></li>
+        </ul>
+
+        <h2>Docker Compose</h2>
+        <ul>
+            <li><strong>Rodar um Compose:</strong> <code>docker compose up</code></li>
+            <li><strong>Desligar um Compose:</strong> <code>docker compose down</code></li>
+            <li><strong>Rodar um Compose em background:</strong> <code>docker compose up -d</code></li>
+        </ul>
+    </div>
+</body>
+</html>

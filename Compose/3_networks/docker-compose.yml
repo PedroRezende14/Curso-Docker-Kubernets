@@ -1,0 +1,24 @@
+version: '3.3'
+
+services:
+  db: # container do mysql
+    image: mysql:5.7 # from
+    volumes:
+      - db_data:/var/lib/mysql # onde os dados vão ficar salvos
+    restart: always # avisando que as atualizações nesse arquivo persistem
+
+    env_file:
+      - ./config/db.env ## deixando a configuração do banco de dados, em um arquivo separadon isso é uma boa pratica
+
+  wordpress: # acessando o ambiente
+    depends_on:
+      - db
+    image: wordpress:latest
+    ports:
+      - "8080:80"
+    restart: always
+    env_file:
+      - ./config/wp.env ## deixando a configuração wordpress, em um arquivo separadon isso é uma boa pratica
+
+volumes:  
+  db_data: {}
